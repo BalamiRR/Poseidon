@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <title>POSEIDON</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        input::placeholder {
+            font-family: FontAwesome, Arial;
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="border p-4 rounded shadow-sm bg-white">
+                <div class="text-center mb-3">
+                    <button class="btn btn-primary text-white font-weight-bold">POSEIDON</button>
+                </div>
+                <h1 class="text-center mt-3 mb-3">Sign Up</h1>
+                <form action="#" th:action="@{/signup}" th:object="${user}" method="POST">
+                    <div class="alert alert-danger" th:if="${signUpError}">
+                        <span>User already exists, please change username.</span>
+                    </div>
+                    <div class="alert alert-danger" th:if="${patternError}">
+                        <span>Password must contain at least one uppercase letter, one number, and one symbol!</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="fullName" th:field="*{fullName}" class="form-control bi bi-person-circle" id="fullName" minlength="6" placeholder="&#xf007; &nbsp;&nbsp;Fullname" required>
+                        <p class="text-danger" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="username" th:field="*{username}" class="form-control bi bi-person-circle" id="username" minlength="6" placeholder="&#xf007; &nbsp;&nbsp;Username" required>
+                        <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" th:field="*{password}" id="password" placeholder="&#xf084; Password" required>
+                        <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                </form>
+                <br/>
+                <a th:href="@{/login}">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
