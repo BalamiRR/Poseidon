@@ -4,41 +4,36 @@
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
     </head>
     <body class="d-flex flex-column min-vh-100 p-3 mb-2 bg-light text-black">
-        <div th:fragment="topbar">
+    <div th:fragment="topbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded-3 px-4 mb-4">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a th:href="@{/user/list}" th:class="${active=='/user/list' ? 'nav-link active' : 'nav-link'}">Bid List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a th:href="@{/curveList}" th:class="${active=='/curveList' ? 'nav-link active' : 'nav-link'}">Curve Points</a>
-                        </li>
-                        <li class="nav-item">
-                            <a th:href="@{/ratings}" th:class="${active=='/ratings' ? 'nav-link active' : 'nav-link'}">Ratings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a th:href="@{/trade}" th:class="${active=='/trade' ? 'nav-link active' : 'nav-link'}">Trade</a>
-                        </li>
-                        <li class="nav-item">
-                            <a th:href="@{/rule}" th:class="${active=='/rule' ? 'nav-link active' : 'nav-link'}">Rule</a>
-                        </li>
+                <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarContent">
+
+                    <!-- Sol taraf: Menü -->
+                    <ul class="navbar-nav d-flex align-items-center">
+                        <li class="nav-item"><a th:href="@{/user/list}" class="nav-link">Bid List</a></li>
+                        <li class="nav-item"><a th:href="@{/curveList}" class="nav-link">Curve Points</a></li>
+                        <li class="nav-item"><a th:href="@{/ratings}" class="nav-link">Ratings</a></li>
+                        <li class="nav-item"><a th:href="@{/trade}" class="nav-link">Trade</a></li>
+                        <li class="nav-item"><a th:href="@{/rule}" class="nav-link">Rule</a></li>
                     </ul>
 
+                    <!-- Sağ taraf: Logged in + Log Out -->
                     <div class="d-flex align-items-center gap-3">
                         <span class="text-muted">Logged in as: <b th:text="${name}"></b></span>
                         <form th:action="@{/logout}" method="post" class="m-0">
                             <button type="submit" class="btn btn-primary fw-bold rounded-pill">Log Out</button>
                         </form>
                     </div>
+
                 </div>
             </nav>
         </div>
+
     </body>
 </html>
 
