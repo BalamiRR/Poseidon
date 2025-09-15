@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <title> Spring Boot </title>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
-</head>
-<body>
-    <h3> HOME PAGE </h3>
-    <p>
-        <span th:text="${name}"></span>
-    </p>
-    <a href="/logout">Logout</a><br>
-    <a href="/user/list" sec:authorize="hasAuthority('ADMIN')">User management</a><br>
-    <a href="/bidList/list">BidList</a>
-</body>
+    <head>
+        <title> Spring Boot </title>
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+    </head>
+    <body class="d-flex flex-column min-vh-100 p-3 mb-2 bg-light text-black">
+        <h3> HOME PAGE </h3>
+        <p>
+            <span th:text="${name}"></span>
+        </p>
+        <div class="container" th:fragment="topbar">
+            <nav class="d-flex justify-content-between align-items-center border-bottom py-2 px-3">
+                <div class="d-flex align-items-center gap-3">
+                    <a th:href="@{/user/list}" th:class="${active=='/user/list.html' ? 'nav-link active' : 'nav-link'}">Bid List</a>
+                    <a th:href="@{/curveList}" th:class="${active=='contact.html' ? 'nav-link active' : 'nav-link'}">Curve Points</a>
+                    <a th:href="@{/ratings}" th:class="${active=='contact.html' ? 'nav-link active' : 'nav-link'}">Ratings</a>
+                    <a th:href="@{/trade}" th:class="${active=='contact.html' ? 'nav-link active' : 'nav-link'}">Trade</a>
+                    <a th:href="@{/rule}" th:class="${active=='contact.html' ? 'nav-link active' : 'nav-link'}">Rule</a>
+                    <form th:action="@{/logout}" method="post" class="m-0">
+                        <button type="submit" class="btn btn-primary text-white font-weight-bold">Log Out</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </body>
 </html>
