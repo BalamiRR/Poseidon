@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+        <meta charset="utf-8"/>
+        <title>Navbar</title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     </head>
-    <body class="d-flex flex-column min-vh-100 p-3 mb-2 bg-light text-black">
-    <div th:fragment="topbar">
+    <body>
+        <div th:fragment="topbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded-3 px-4 mb-4">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,10 +15,10 @@
                 </button>
 
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarContent">
-
                     <!-- Sol taraf: Menü -->
                     <ul class="navbar-nav d-flex align-items-center">
-                        <li class="nav-item"><a th:href="@{/user/list}" class="nav-link">Bid List</a></li>
+                        <li class="fw-bold"><h3>POSEIDON</h3></li>
+                        <li class="nav-item"><a th:href="@{/bidList/list}" class="nav-link">Bid List</a></li>
                         <li class="nav-item"><a th:href="@{/curveList}" class="nav-link">Curve Points</a></li>
                         <li class="nav-item"><a th:href="@{/ratings}" class="nav-link">Ratings</a></li>
                         <li class="nav-item"><a th:href="@{/trade}" class="nav-link">Trade</a></li>
@@ -33,7 +36,6 @@
                 </div>
             </nav>
         </div>
-
     </body>
 </html>
 
