@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class BidList {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer BidListId;
+    private Integer bidListId;
 
     @NotBlank(message = "Account field is mandatory")
     private String account;
@@ -24,7 +24,6 @@ public class BidList {
     @NotBlank(message = "Type field is mandatory")
     private String type;
 
-    @NotBlank(message = "Type field is mandatory")
     @DecimalMin(value = "0", message = "Value must be greater than 0")
     private Double bidQuantity;
 
