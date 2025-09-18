@@ -1,8 +1,13 @@
 package com.nnk.springboot.services;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.User;
+
+import java.util.List;
 
 public interface UserService {
     User findByUsername(String username);
     void save(User user);
+    List<BidList> findAll();
+
 }
