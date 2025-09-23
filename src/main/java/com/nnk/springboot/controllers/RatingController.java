@@ -1,24 +1,27 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.services.RatingService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-
+@RequiredArgsConstructor
 @Controller
 public class RatingController {
+    private final RatingService ratingService;
     // TODO: Inject Rating service
 
-    @RequestMapping("/rating/list")
+    @GetMapping("/rating/list")
     public String home(Model model)
     {
         // TODO: find all Rating, add to model
+        model.addAttribute("ratings", ratingService.findAll());
         return "rating/list";
     }
 
