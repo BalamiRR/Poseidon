@@ -15,24 +15,22 @@
                 </button>
 
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarContent">
-                    <!-- Sol taraf: Menü -->
                     <ul class="navbar-nav d-flex align-items-center">
                         <li class="fw-bold"><h3>POSEIDON</h3></li>
                         <li class="nav-item"><a th:href="@{/bidList/list}" class="nav-link">Bid List</a></li>
                         <li class="nav-item"><a th:href="@{/curvePoint/list}" class="nav-link">Curve Points</a></li>
-                        <li class="nav-item"><a th:href="@{/ratings}" class="nav-link">Ratings</a></li>
-                        <li class="nav-item"><a th:href="@{/trade}" class="nav-link">Trade</a></li>
+                        <li class="nav-item"><a th:href="@{/rating/list}" class="nav-link">Ratings</a></li>
+                        <li class="nav-item"><a th:href="@{/trade/list}" class="nav-link">Trade</a></li>
                         <li class="nav-item"><a th:href="@{/rule}" class="nav-link">Rule</a></li>
                     </ul>
 
                     <!-- Logged in + Log Out -->
                     <div class="d-flex align-items-center gap-3">
-                        <span class="text-muted"> <b th:text="${name}"></b></span>
+                        <span class="text-muted"> <b th:text="${username}"></b></span>
                         <form th:action="@{/logout}" method="post" class="m-0">
                             <button type="submit" class="btn btn-primary fw-bold rounded-pill">Log Out</button>
                         </form>
                     </div>
-
                 </div>
             </nav>
         </div>
