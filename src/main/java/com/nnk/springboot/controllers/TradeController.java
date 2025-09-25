@@ -1,7 +1,10 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.services.TradeService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,14 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequiredArgsConstructor
 @Controller
 public class TradeController {
     // TODO: Inject Trade service
+    private final TradeService tradeService;
+    private final HttpServletRequest httpServletRequest;
+
 
     @RequestMapping("/trade/list")
-    public String home(Model model)
-    {
-        // TODO: find all Trade, add to model
+    public String home(Model model) {
+        model.addAttribute("trades", tradeService.findAll());
+        // username model’e ekleniyor
+        String username = httpServletRequest.getRemoteUser();
+        model.addAttribute("username", username != null ? username : "Anonymous");
+        model.addAttribute("trades", tradeService.findAll());
+
         return "trade/list";
     }
 
