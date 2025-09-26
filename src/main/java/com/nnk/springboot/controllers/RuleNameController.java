@@ -1,7 +1,10 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.services.RuleNameServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,15 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+@RequiredArgsConstructor
 @Controller
 public class RuleNameController {
     // TODO: Inject RuleName service
+    private final RuleNameServiceImpl ruleNameServiceImpl;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
-        // TODO: find all RuleName, add to model
+    public String home(Model model, HttpServletRequest request) {
+        model.addAttribute("ruleNames", ruleNameServiceImpl.findAll());
         return "ruleName/list";
     }
 
