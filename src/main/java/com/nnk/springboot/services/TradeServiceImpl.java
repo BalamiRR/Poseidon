@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 @Transactional
 public class TradeServiceImpl implements TradeService {
-
     private final TradeRepository tradeRepository;
 
     @Override
