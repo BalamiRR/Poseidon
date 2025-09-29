@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8"/>
 		<title>Bid List</title>
@@ -22,7 +22,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="trade : ${trades}">
-						<td style="width: 10%" th:text="${trade.id}"></td>
+						<td style="width: 10%" th:text="${trade.tradeId}"></td>
 						<td th:text="${trade.account}"></td>
 						<td th:text="${trade.type}"></td>
 						<td th:text="${trade.buyQuantity}"></td>
