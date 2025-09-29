@@ -14,20 +14,17 @@ import java.time.LocalDateTime;
 @Table(name = "curvepoint")
 public class CurvePoint {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Digits(integer = 20, fraction = 0)
     @Min(value = 0L, message = "The value must be positive")
     @NotNull(message = "Term is mandatory")
     private Integer curveId;
 
-    @Digits(integer = 20, fraction = 2)
     @Min(value = 0L, message = "The value must be positive")
     @NotNull(message = "Term is mandatory")
     private Double term;
 
-    @Digits(integer = 20, fraction = 2)
     @Min(value = 0L, message = "The value must be positive")
     @NotNull(message = "Value is mandatory")
     private Double value;

@@ -13,7 +13,7 @@ import lombok.ToString;
 @Table(name = "rulename")
 public class RuleName {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @NotBlank(message = "Name is mandatory")
