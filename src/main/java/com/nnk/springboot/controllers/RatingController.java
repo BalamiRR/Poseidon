@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RatingController {
     private final RatingService ratingService;
-    // TODO: Inject Rating service
 
     @GetMapping("/rating/list")
-    public String home(Model model)
-    {
-        // TODO: find all Rating, add to model
-        model.addAttribute("ratings", ratingService.findAll());
+    public String home(Model model) {
+        model.addAttribute("ruleNames", ratingService.findAll());
         return "rating/list";
     }
 
