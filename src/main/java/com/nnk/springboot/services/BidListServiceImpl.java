@@ -5,7 +5,6 @@ import com.nnk.springboot.repositories.BidListRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,5 +16,10 @@ public class BidListServiceImpl implements BidListService {
     @Override
     public List<BidList> findAll() {
         return bidListRepository.findAll();
+    }
+
+    @Override
+    public void insertBidList(BidList bidList) {
+        bidListRepository.save(bidList);
     }
 }

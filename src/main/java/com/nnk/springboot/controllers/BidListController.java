@@ -7,13 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.security.Principal;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,20 +17,23 @@ public class BidListController {
 
     @GetMapping("/bidList/list")
     public String home(Model model) {
-        // TODO: call service find all bids to show to the view
         model.addAttribute("bidLists", bidListService.findAll());
         return "bidList/list";
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bid) {
+    public String addBidForm(Model model) {
+        model.addAttribute("bidList", new BidList());
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-        return "bidList/add";
+    public String validate(@Valid BidList bidList, BindingResult result) {
+        if(result.hasErrors()){
+            return "bidList/add";
+        }
+        bidListService.insertBidList(bidList);
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")

@@ -1,8 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,16 +14,18 @@ import java.time.LocalDateTime;
 @Table(name = "bidlist")
 public class BidList {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bidListId;
 
+    @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
     @NotBlank(message = "Account field is mandatory")
     private String account;
 
+    @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
     @NotBlank(message = "Type field is mandatory")
     private String type;
 
-    @DecimalMin(value = "0", message = "Value must be greater than 0")
+    @Min(value = 0L, message = "The value must be positive")
     private Double bidQuantity;
 
     private Double askQuantity;
@@ -46,11 +47,21 @@ public class BidList {
     private String sourceListId;
     private String side;
 
+    public BidList() {
+    }
+
     public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
     }
 
+    public void setAccount(String account) {
+        this.account = (account == null) ? null : account.trim();
+    }
+
+    public void setType(String type) {
+        this.type = (type == null) ? null : type.trim();
+    }
 
 }
