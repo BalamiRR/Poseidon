@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
     private final BidListService bidListService;
 
     @GetMapping("/bidList/list")
