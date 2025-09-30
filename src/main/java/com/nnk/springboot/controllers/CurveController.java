@@ -1,7 +1,6 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.services.BidListService;
 import com.nnk.springboot.services.CurvePointService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CurveController {
     // TODO: Inject Curve Point service
-    private final CurvePointService bidListService;
+    private final CurvePointService curvePointService;
 
     @GetMapping("/curvePoint/list")
     public String home(Model model) {
-        // TODO: find all Curve Point, add to model
-        model.addAttribute("curvePoints", bidListService.findAll());
+        model.addAttribute("curvePoints", curvePointService.findAll());
         return "curvePoint/list";
     }
 
@@ -31,9 +29,12 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Curve list
-        return "curvePoint/add";
+    public String validate(@Valid CurvePoint curvePoint, BindingResult result) {
+        if(result.hasErrors()){
+            return "curvePoint/add";
+        }
+        curvePointService.insertCurvePoint(curvePoint);
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
