@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
-@Table(name = "bidlist")
+@Table(name = "BidList")
 public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

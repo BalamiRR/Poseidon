@@ -1,51 +1,46 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "trade")
 public class Trade {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer tradeId;
+    @Column(name = "trade_id")
+    private Integer trade_id;
 
-    @NotNull(message = "Account is mandatory")
+    @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
+    @NotBlank(message = "Account is mandatory")
+    @Column(name = "account")
     private String account;
 
-    @NotNull(message = "Type is mandatory")
+    @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
+    @NotBlank(message = "Type is mandatory")
+    @Column(name = "type")
     private String type;
 
-    @NotNull(message = "BuyQuantity is mandatory")
-    private Double buyQuantity;
+    @NotNull(message = "Numbers has to be present")
+    @Min(value = 0L, message = "The value must be positive")
+    @Column(name = "buy_quantity")
+    private Double buy_quantity;
 
-    private Double sellQuantity;
-    private Double buyPrice;
-    private Double sellPrice;
-    private String benchmark;
-    private LocalDateTime tradeDate;
-    private String security;
-    private String status;
-    private String trader;
-    private String book;
-    private String creationName;
-    private LocalDateTime  creationDate;
-    private String revisionName;
-    private LocalDateTime  revisionDate;
-    private  String dealName;
-    private String dealType;
-    private String sourceListId;
-    private String side;
+    public Trade() {}
 
     public Trade(String account, String type) {
         this.account = account;
         this.type = type;
+    }
+
+    public Trade(String account, String type, Double buy_quantity) {
+        this.account = account;
+        this.type = type;
+        this.buy_quantity = buy_quantity;
     }
 }

@@ -10,10 +10,11 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "rulename")
+@Table(name = "RuleName")
 public class RuleName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Id")
     Integer id;
 
     @NotBlank(message = "Name is mandatory")

@@ -11,10 +11,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "CurvePoint")
 public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Id")
     private Integer id;
 
     @Min(value = 0L, message = "The value must be positive")
@@ -31,6 +32,10 @@ public class CurvePoint {
 
     private LocalDateTime asOfDate;
     private LocalDateTime creationDate;
+
+    public CurvePoint(){
+
+    }
 
     public CurvePoint(Integer curveId, Double term, Double value ) {
         this.term = term;
