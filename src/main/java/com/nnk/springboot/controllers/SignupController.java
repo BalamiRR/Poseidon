@@ -30,7 +30,7 @@ public class SignupController {
     }
 
     @PostMapping
-    private String signupUser(@Valid @ModelAttribute("user") User user,
+    public String signupUser(@Valid @ModelAttribute("user") User user,
                               BindingResult result, Model model, RedirectAttributes redirAttrs) {
         String signupError = null;
         String patternError = null;
@@ -52,6 +52,8 @@ public class SignupController {
         log.info("signupError = {}", signupError);
         log.info("patternError = {}", patternError);
         log.info("hasErrors = {}", result.hasErrors());
+        log.info("Password valid: {}", valid);
+        log.info("Result errors: {}", result.getAllErrors());
 
         if (signupError == null && patternError == null && (!result.hasErrors())) {
             userService.save(user);
