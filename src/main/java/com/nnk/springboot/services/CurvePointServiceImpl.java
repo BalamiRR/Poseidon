@@ -5,7 +5,6 @@ import com.nnk.springboot.repositories.CurvePointRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,5 +16,10 @@ public class CurvePointServiceImpl implements CurvePointService {
     @Override
     public List<CurvePoint> findAll() {
         return curvePointRepository.findAll();
+    }
+
+    @Override
+    public void insertCurvePoint(CurvePoint curvePoint) {
+        curvePointRepository.save(curvePoint);
     }
 }
