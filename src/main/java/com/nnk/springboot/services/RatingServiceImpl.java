@@ -18,4 +18,9 @@ public class RatingServiceImpl implements RatingService {
     public List<Rating> findAll() {
         return ratingRepository.findAll();
     }
+
+    @Override
+    public void insertRatings(Rating rating) {
+        ratingRepository.save(rating);
+    }
 }

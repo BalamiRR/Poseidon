@@ -18,7 +18,7 @@ public class RatingController {
 
     @GetMapping("/rating/list")
     public String home(Model model) {
-        model.addAttribute("ruleNames", ratingService.findAll());
+        model.addAttribute("ratings", ratingService.findAll());
         return "rating/list";
     }
 
@@ -28,9 +28,12 @@ public class RatingController {
     }
 
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
-        return "rating/add";
+    public String validate(@Valid Rating rating, BindingResult result) {
+        if(result.hasErrors()){
+            return "rating/add";
+        }
+        ratingService.insertRatings(rating);
+        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")
