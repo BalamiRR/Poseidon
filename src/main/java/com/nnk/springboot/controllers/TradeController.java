@@ -30,9 +30,12 @@ public class TradeController {
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
-        return "trade/add";
+    public String validate(@Valid Trade trade, BindingResult result) {
+        if(result.hasErrors()){
+            return "trade/add";
+        }
+        tradeServiceImpl.insertTrade(trade);
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")

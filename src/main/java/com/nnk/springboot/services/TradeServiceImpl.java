@@ -18,4 +18,9 @@ public class TradeServiceImpl implements TradeService {
     public List<Trade> findAll() {
         return tradeRepository.findAll();
     }
+
+    @Override
+    public void insertTrade(Trade trade) {
+        tradeRepository.save(trade);
+    }
 }
