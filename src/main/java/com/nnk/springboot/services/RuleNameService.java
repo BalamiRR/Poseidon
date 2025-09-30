@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RuleNameService {
     List<RuleName> findAll();
+    void insertRuleName(RuleName ruleName);
 }
