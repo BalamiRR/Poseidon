@@ -17,7 +17,6 @@ import java.util.Optional;
 @Controller
 public class BidListController {
     private final BidListService bidListService;
-    private final BidListRepository bidListRepository;
 
     @GetMapping("/bidList/list")
     public String home(Model model) {
