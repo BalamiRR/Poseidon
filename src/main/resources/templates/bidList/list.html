@@ -12,25 +12,25 @@
 			<a href="/bidList/add" class="btn btn-primary btn-sm mb-3">Add New</a>
 			<table class="table table-bordered">
 				<thead>
-				<tr>
-					<th>Id</th>
-					<th>Account</th>
-					<th>Type</th>
-					<th>Bid Quantity</th>
-					<th>Action</th>
-				</tr>
+					<tr>
+						<th>Id</th>
+						<th>Account</th>
+						<th>Type</th>
+						<th>Bid Quantity</th>
+						<th class="text-center">Action</th>
+					</tr>
 				</thead>
 				<tbody>
-				<tr th:each="bidList : ${bidLists}">
-					<td th:text="${bidList.bidListId}"></td>
-					<td th:text="${bidList.account}"></td>
-					<td th:text="${bidList.type}"></td>
-					<td th:text="${bidList.bidQuantity}"></td>
-					<td>
-						<a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}" class="btn btn-sm btn-warning">Edit</a>
-						<a th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}" class="btn btn-sm btn-danger">Delete</a>
-					</td>
-				</tr>
+					<tr th:each="bidList : ${bidLists}">
+						<td th:text="${bidList.bidListId}"></td>
+						<td th:text="${bidList.account}"></td>
+						<td th:text="${bidList.type}"></td>
+						<td th:text="${bidList.bidQuantity}"></td>
+						<td class="text-center">
+							<a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}" class="btn btn-sm btn-warning">Edit</a>
+							<a th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}" class="btn btn-sm btn-danger">Delete</a>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
