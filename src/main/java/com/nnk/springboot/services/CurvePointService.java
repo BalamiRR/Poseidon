@@ -7,4 +7,6 @@ import java.util.List;
 public interface CurvePointService {
     List<CurvePoint> findAll();
     void insertCurvePoint(CurvePoint curvePoint);
+    Boolean updateCurvePoint(int id, CurvePoint curvePoint);
+    CurvePoint findById(int id);
 }

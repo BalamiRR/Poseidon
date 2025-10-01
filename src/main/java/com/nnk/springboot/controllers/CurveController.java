@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +41,8 @@ public class CurveController {
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get CurvePoint by Id and to model then show to the form
+        CurvePoint listCurvePoint = curvePointService.findById(id);
+        model.addAttribute("curvePoint", listCurvePoint);
         return "curvePoint/update";
     }
 
@@ -47,6 +50,13 @@ public class CurveController {
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Curve and return Curve list
+        if(result.hasErrors()) {
+            return "curvePoint/update";
+        }
+        Boolean updated = curvePointService.updateCurvePoint(id, curvePoint);
+        if(updated){
+            model.addAttribute("curvePoints", curvePointService.findAll());
+        }
         return "redirect:/curvePoint/list";
     }
 
