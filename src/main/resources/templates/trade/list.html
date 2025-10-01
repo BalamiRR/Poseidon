@@ -2,7 +2,7 @@
 	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8"/>
-		<title>Bid List</title>
+		<title>Curve Point</title>
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 	</head>
 	<body>
@@ -22,13 +22,13 @@
 				</thead>
 				<tbody>
 					<tr th:each="trade : ${trades}">
-						<td style="width: 10%" th:text="${trade.trade_id}"></td>
+						<td style="width: 10%" th:text="${trade.tradeId}"></td>
 						<td th:text="${trade.account}"></td>
 						<td th:text="${trade.type}"></td>
-						<td th:text="${trade.buy_quantity}"></td>
+						<td th:text="${trade.buyQuantity}"></td>
 						<td style="width: 15%" class="text-center">
-							<a th:href="@{/trade/update/{id}(id=${trade.getTrade_id()})}" class="btn btn-sm btn-warning">Edit</a>&nbsp;|&nbsp;
-							<a th:href="@{/trade/delete/{id}(id=${trade.getTrade_id()})}" class="btn btn-sm btn-danger">Delete</a>
+							<a th:href="@{/trade/update/{id}(id=${trade.getTradeId()})}" class="btn btn-sm btn-warning">Edit</a>&nbsp;|&nbsp;
+							<a th:href="@{/trade/delete/{id}(id=${trade.getTradeId()})}" class="btn btn-sm btn-danger">Delete</a>
 						</td>
 					</tr>
 				</tbody>

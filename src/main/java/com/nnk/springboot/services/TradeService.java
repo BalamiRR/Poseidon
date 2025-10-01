@@ -7,4 +7,6 @@ import java.util.List;
 public interface TradeService {
     List<Trade> findAll();
     void insertTrade(Trade trade);
+    Boolean updateTrade(int id, Trade trade);
+    Trade findById(int id);
 }

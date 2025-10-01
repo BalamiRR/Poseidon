@@ -14,7 +14,7 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trade_id")
-    private Integer trade_id;
+    private Integer tradeId;
 
     @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
     @NotBlank(message = "Account is mandatory")
@@ -29,7 +29,7 @@ public class Trade {
     @NotNull(message = "Numbers has to be present")
     @Min(value = 0L, message = "The value must be positive")
     @Column(name = "buy_quantity")
-    private Double buy_quantity;
+    private Double buyQuantity;
 
     public Trade() {}
 
@@ -38,9 +38,9 @@ public class Trade {
         this.type = type;
     }
 
-    public Trade(String account, String type, Double buy_quantity) {
+    public Trade(String account, String type, Double buyQuantity) {
         this.account = account;
         this.type = type;
-        this.buy_quantity = buy_quantity;
+        this.buyQuantity = buyQuantity;
     }
 }
