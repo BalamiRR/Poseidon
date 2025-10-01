@@ -32,11 +32,11 @@
                                 <span>Password must contain at least one uppercase letter, one number, and one symbol!</span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="full_name" th:field="*{full_name}" class="form-control bi bi-person-circle" id="full_name" minlength="6" placeholder="&#xf007; &nbsp;&nbsp;Fullname" required>
+                                <input type="text" name="full_name" th:field="*{full_name}" class="form-control bi bi-person-circle" id="full_name" minlength="4" placeholder="&#xf007; &nbsp;&nbsp;Fullname" required>
                                 <p class="text-danger" th:if="${#fields.hasErrors('full_name')}" th:errors="*{full_name}"></p>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="username" th:field="*{username}" class="form-control bi bi-person-circle" id="username" minlength="6" placeholder="&#xf007; &nbsp;&nbsp;Username" required>
+                                <input type="text" name="username" th:field="*{username}" class="form-control bi bi-person-circle" id="username" minlength="4" placeholder="&#xf007; &nbsp;&nbsp;Username" required>
                                 <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                             </div>
                             <div class="form-group">
