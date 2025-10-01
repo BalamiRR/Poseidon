@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Controller
 public class RuleNameController {
@@ -42,6 +44,8 @@ public class RuleNameController {
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get RuleName by Id and to model then show to the form
+        RuleName ruleName = ruleNameServiceImpl.findyById(id);
+        model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
     }
 
@@ -49,6 +53,14 @@ public class RuleNameController {
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
+        if(result.hasErrors()){
+            return "/ruleName/update";
+        }
+
+        Boolean updatedRuleName = ruleNameServiceImpl.updateRuleName(id, ruleName);
+        if(updatedRuleName){
+            model.addAttribute("ruleNames", ruleNameServiceImpl.findAll());
+        }
         return "redirect:/ruleName/list";
     }
 
