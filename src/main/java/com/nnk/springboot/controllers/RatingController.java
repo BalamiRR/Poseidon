@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Controller
 public class RatingController {
@@ -39,6 +41,8 @@ public class RatingController {
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Rating by Id and to model then show to the form
+        Rating rating = ratingService.findById(id);
+        model.addAttribute("rating", rating);
         return "rating/update";
     }
 
@@ -46,6 +50,13 @@ public class RatingController {
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Rating and return Rating list
+        if(result.hasErrors()){
+            return "/rating/update";
+        }
+        Boolean updated = ratingService.updateRatingService(id,rating);
+        if(updated){
+            model.addAttribute("ratings", ratingService.findAll());
+        }
         return "redirect:/rating/list";
     }
 

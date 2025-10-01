@@ -7,4 +7,6 @@ import java.util.List;
 public interface RatingService {
     List<Rating> findAll();
     void insertRatings(Rating rating);
+    Boolean updateRatingService(int id, Rating rating);
+    Rating findById(int id);
 }

@@ -4,10 +4,13 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 @Service
@@ -22,5 +25,37 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public void insertRatings(Rating rating) {
         ratingRepository.save(rating);
+    }
+
+    @Override
+    public Boolean updateRatingService(int id, Rating rating) {
+        Optional<Rating> optionalRating = ratingRepository.findById(id);
+        boolean updated = false;
+        if(optionalRating.isPresent()){
+            Rating newRating = optionalRating.get();
+            newRating.setMoodysRating(rating.getMoodysRating());
+            newRating.setSandPRating(rating.getSandPRating());
+            newRating.setFitchRating(rating.getFitchRating());
+            newRating.setOrderNumber(rating.getOrderNumber());
+            ratingRepository.save(newRating);
+            updated = true;
+            log.info("Successfully update ! {} ", id);
+            return updated;
+        } else {
+            log.error("Error to update {} !", id);
+            return updated;
+        }
+    }
+
+    @Override
+    public Rating findById(int id) {
+        Optional<Rating> ratingList = ratingRepository.findById(id);
+        if(ratingList.isPresent()){
+            log.info("Successfully finding by Id {}", id);
+            return ratingList.get();
+        } else {
+            log.info("Error finding by Id {}", id);
+            return null;
+        }
     }
 }
