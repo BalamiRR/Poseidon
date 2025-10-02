@@ -58,4 +58,15 @@ public class RatingServiceImpl implements RatingService {
             return null;
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        Optional<Rating> rating = ratingRepository.findById(id);
+        if (rating.isPresent()) {
+            ratingRepository.delete(rating.get());
+            log.error("Successfully deleted by id {}", id);
+        } else {
+            log.error("Failed to delete with id " + id);
+        }
+    }
 }
