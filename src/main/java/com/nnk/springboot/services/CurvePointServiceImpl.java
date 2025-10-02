@@ -56,5 +56,16 @@ public class CurvePointServiceImpl implements CurvePointService {
         }
     }
 
+    @Override
+    public void deleteById(int id) {
+        Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
+        if (curvePoint.isPresent()) {
+            curvePointRepository.delete(curvePoint.get());
+            log.error("Successfully deleted by id {}", id);
+        } else {
+            log.error("Failed to delete with id " + id);
+        }
+    }
+
 
 }

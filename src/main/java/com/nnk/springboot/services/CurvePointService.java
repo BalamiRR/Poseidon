@@ -9,4 +9,5 @@ public interface CurvePointService {
     void insertCurvePoint(CurvePoint curvePoint);
     Boolean updateCurvePoint(int id, CurvePoint curvePoint);
     CurvePoint findById(int id);
+    void deleteById(int id);
 }
