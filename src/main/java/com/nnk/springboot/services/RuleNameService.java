@@ -9,4 +9,5 @@ public interface RuleNameService {
     void insertRuleName(RuleName ruleName);
     Boolean updateRuleName(int id, RuleName ruleName);
     RuleName findyById(int id);
+    void deleteById(int id);
 }

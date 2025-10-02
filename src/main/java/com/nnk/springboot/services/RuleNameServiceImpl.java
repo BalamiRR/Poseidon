@@ -58,4 +58,15 @@ public class RuleNameServiceImpl implements RuleNameService{
             return null;
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        Optional<RuleName> ruleName = ruleNameRepository.findById(id);
+        if (ruleName.isPresent()) {
+            ruleNameRepository.delete(ruleName.get());
+            log.error("Successfully deleted by id {}", id);
+        } else {
+            log.error("Failed to delete with id " + id);
+        }
+    }
 }
