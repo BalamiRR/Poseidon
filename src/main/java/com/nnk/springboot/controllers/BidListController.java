@@ -60,7 +60,7 @@ public class BidListController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list
         bidListService.deleteById(id);
-        model.addAttribute("ruleNames", bidListService.findAll());
+        model.addAttribute("bidLists", bidListService.findAll());
         return "redirect:/bidList/list";
     }
 }
