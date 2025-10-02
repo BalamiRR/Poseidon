@@ -55,5 +55,17 @@ public class BidListServiceImpl implements BidListService {
             return null;
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        Optional<BidList> bidList = bidListRepository.findById(id);
+        if (bidList.isPresent()) {
+            bidListRepository.delete(bidList.get());
+            log.error("Successfully deleted by id {}", id);
+        } else {
+            log.error("Failed to delete with id " + id);
+        }
+
+    }
 }
 

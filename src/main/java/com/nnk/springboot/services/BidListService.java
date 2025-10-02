@@ -8,4 +8,5 @@ public interface BidListService {
     void insertBidList(BidList bidList);
     Boolean updateBidList(int id, BidList bidList);
     BidList findById(int id);
+    void deleteById(int id);
 }
