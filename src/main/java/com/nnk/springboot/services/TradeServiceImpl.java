@@ -57,4 +57,16 @@ public class TradeServiceImpl implements TradeService {
             return null;
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        Optional<Trade> trade = tradeRepository.findById(id);
+        if (trade.isPresent()) {
+            tradeRepository.delete(trade.get());
+            log.error("Successfully deleted by id {}", id);
+        } else {
+            log.error("Failed to delete with id " + id);
+        }
+
+    }
 }

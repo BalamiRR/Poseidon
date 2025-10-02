@@ -9,4 +9,5 @@ public interface TradeService {
     void insertTrade(Trade trade);
     Boolean updateTrade(int id, Trade trade);
     Trade findById(int id);
+    void deleteById(int id);
 }

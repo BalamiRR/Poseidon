@@ -25,7 +25,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String addUser(Trade trade) {
         return "trade/add";
     }
 
@@ -55,7 +55,7 @@ public class TradeController {
         }
         Boolean updated = tradeServiceImpl.updateTrade(id, trade);
         if (updated) {
-            model.addAttribute("bidLists", tradeServiceImpl.findAll());
+            model.addAttribute("trades", tradeServiceImpl.findAll());
         }
         return "redirect:/trade/list";
     }
@@ -63,6 +63,8 @@ public class TradeController {
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        tradeServiceImpl.deleteById(id);
+        model.addAttribute("trades", tradeServiceImpl.findAll());
         return "redirect:/trade/list";
     }
 }
