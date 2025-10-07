@@ -16,7 +16,9 @@
 
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarContent">
                     <ul class="navbar-nav d-flex align-items-center">
-                        <li class="fw-bold"><h3>POSEIDON</h3></li>
+                        <li class="nav-item">
+                            <a href="/home" class="navbar-brand fw-bold fs-3">POSEIDON</a>
+                        </li>
                         <li class="nav-item"><a th:href="@{/bidList/list}" class="nav-link">Bid List</a></li>
                         <li class="nav-item"><a th:href="@{/curvePoint/list}" class="nav-link">Curve Points</a></li>
                         <li class="nav-item"><a th:href="@{/rating/list}" class="nav-link">Ratings</a></li>
@@ -26,9 +28,10 @@
 
                     <!-- Logged in + Log Out -->
                     <div class="d-flex align-items-center gap-3">
-                        <span class="text-muted"> <b th:text="${username}"></b></span>
-                        <form th:action="@{/logout}" method="post" class="m-0">
-                            <button type="submit" class="btn btn-primary fw-bold rounded-pill">Log Out</button>
+                        <span th:text="${name}"></span>&nbsp;
+                        <span class="text-muted"><b th:text="${username}"></b></span>
+                        <form th:action="@{/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-secondary btn-sm ms-2">Logout</button>
                         </form>
                     </div>
                 </div>
@@ -36,4 +39,3 @@
         </div>
     </body>
 </html>
-
