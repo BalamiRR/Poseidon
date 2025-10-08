@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.TradeServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,9 @@ public class TradeController {
     private final TradeServiceImpl tradeServiceImpl;
 
     @RequestMapping("/trade/list")
-    public String home(Model model) {
+    public String home(Authentication authentication, Model model) {
+        String name = authentication.getName();
+        model.addAttribute("name", "Logged in as: " + name);
         model.addAttribute("trades", tradeServiceImpl.findAll());
         return "trade/list";
     }
