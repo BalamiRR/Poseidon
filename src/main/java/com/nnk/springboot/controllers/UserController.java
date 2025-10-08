@@ -20,8 +20,9 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/user/list")
-    public String home(Authentication auth, Model model)
-    {
+    public String home(Authentication authentication, Model model) {
+        String name = authentication.getName();
+        model.addAttribute("name", "Logged in as: " + name);
         model.addAttribute("users", userService.findAll());
         return "user/list";
     }
