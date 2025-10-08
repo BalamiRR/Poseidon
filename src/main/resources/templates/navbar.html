@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8"/>
         <title>Navbar</title>
@@ -24,6 +24,9 @@
                         <li class="nav-item"><a th:href="@{/rating/list}" class="nav-link">Ratings</a></li>
                         <li class="nav-item"><a th:href="@{/trade/list}" class="nav-link">Trade</a></li>
                         <li class="nav-item"><a th:href="@{/ruleName/list}" class="nav-link">Rule</a></li>
+                        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{/user/list}" class="nav-link">User Management</a>
+                        </li>
                     </ul>
 
                     <!-- Logged in + Log Out -->
