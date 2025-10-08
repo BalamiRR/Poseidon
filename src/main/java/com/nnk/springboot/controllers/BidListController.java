@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.services.BidListService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,9 @@ public class BidListController {
     private final BidListService bidListService;
 
     @GetMapping("/bidList/list")
-    public String home(Model model) {
+    public String home(Authentication authentication, Model model) {
+        String name = authentication.getName();
+        model.addAttribute("name", "Logged in as: " + name);
         model.addAttribute("bidLists", bidListService.findAll());
         return "bidList/list";
     }
