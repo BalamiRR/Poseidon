@@ -16,12 +16,12 @@ public class Trade {
     @Column(name = "trade_id")
     private Integer tradeId;
 
-    @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
+    @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
     @NotBlank(message = "Account is mandatory")
     @Column(name = "account")
     private String account;
 
-    @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
+    @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
     @NotBlank(message = "Type is mandatory")
     @Column(name = "type")
     private String type;

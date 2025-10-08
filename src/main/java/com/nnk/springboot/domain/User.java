@@ -20,14 +20,14 @@ public class User {
     @Column(name="Id")
     private Integer id;
 
-    @Pattern(regexp = "^[A-Za-z0-9 ]+$", message = "Input has to be alphanumeric!")
+    @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
     @NotBlank(message = "Username is mandatory")
     private String username;
 
     @NotBlank(message = "Password is mandatory")
     private String password;
 
-    @Pattern(regexp = "^[A-Za-z ]+$", message = "FullName has to be text!")
+    @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
     @NotBlank(message = "FullName is mandatory")
     private String full_name;
 

@@ -1,9 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
@@ -18,16 +16,16 @@ public class CurvePoint {
     @Column(name="Id")
     private Integer id;
 
-    @Min(value = 0L, message = "The value must be positive")
+    @Min(value = 0, message = "The value must be positive")
     @NotNull(message = "Term is mandatory")
     private Integer curveId;
 
-    @Min(value = 0L, message = "The value must be positive")
     @NotNull(message = "Term is mandatory")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Term must be positive")
     private Double term;
 
-    @Min(value = 0L, message = "The value must be positive")
     @NotNull(message = "Value is mandatory")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Value must be positive")
     private Double value;
 
     private LocalDateTime asOfDate;

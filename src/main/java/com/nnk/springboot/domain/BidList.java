@@ -4,12 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "BidList")
 public class BidList {
@@ -28,25 +25,6 @@ public class BidList {
     @Min(value = 0L, message = "The value must be positive")
     private Double bidQuantity;
 
-    private Double askQuantity;
-    private Double bid;
-    private Double ask;
-    private String benchmark;
-    private LocalDateTime bidListDate;
-    private String commentary;
-    private String security;
-    private String status;
-    private String trader;
-    private String book;
-    private String creationName;
-    private LocalDateTime creationDate;
-    private String revisionName;
-    private LocalDateTime revisionDate;
-    private String dealName;
-    private String dealType;
-    private String sourceListId;
-    private String side;
-
     public BidList() {
     }
 
@@ -56,12 +34,12 @@ public class BidList {
         this.bidQuantity = bidQuantity;
     }
 
-    public void setAccount(String account) {
-        this.account = (account == null) ? null : account.trim();
-    }
-
-    public void setType(String type) {
-        this.type = (type == null) ? null : type.trim();
-    }
+//    public void setAccount(String account) {
+//        this.account = (account == null) ? null : account.trim();
+//    }
+//
+//    public void setType(String type) {
+//        this.type = (type == null) ? null : type.trim();
+//    }
 
 }
