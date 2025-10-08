@@ -5,6 +5,7 @@ import com.nnk.springboot.services.RuleNameServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,9 @@ public class RuleNameController {
     private final RuleNameServiceImpl ruleNameServiceImpl;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model, HttpServletRequest request) {
+    public String home(Authentication authentication, Model model) {
+        String name = authentication.getName();
+        model.addAttribute("name", "Logged in as: " + name);
         model.addAttribute("ruleNames", ruleNameServiceImpl.findAll());
         return "ruleName/list";
     }
