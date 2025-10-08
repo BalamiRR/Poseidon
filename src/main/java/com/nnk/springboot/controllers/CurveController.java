@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,9 @@ public class CurveController {
     private final CurvePointService curvePointService;
 
     @GetMapping("/curvePoint/list")
-    public String home(Model model) {
+    public String home(Authentication authentication, Model model) {
+        String name = authentication.getName();
+        model.addAttribute("name", "Logged in as: " + name);
         model.addAttribute("curvePoints", curvePointService.findAll());
         return "curvePoint/list";
     }
