@@ -2,45 +2,57 @@ package com.nnk.springboot;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 public class RuleTests {
 
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
 
+	@BeforeEach
+	public void setup() {
+		ruleNameRepository.deleteAll();
+	}
+
 	@Test
 	public void ruleTest() {
-		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+		RuleName rule = new RuleName("RuleName", "Description", "Json", "Template", "SQL", "SQLPart");
+		rule.setSqlStr("ornek");
 
 		// Save
 		rule = ruleNameRepository.save(rule);
-		Assert.assertNotNull(rule.getId());
-		Assert.assertTrue(rule.getName().equals("Rule Name"));
+		assertNotNull(rule.getId());
+		assertEquals("RuleName", rule.getName());
+		assertEquals("Json", rule.getJson());
+		assertEquals("Template", rule.getTemplate());
+		assertEquals("ornek", rule.getSqlStr());
 
 		// Update
-		rule.setName("Rule Name Update");
+		rule.setName("RuleNameUpdate");
 		rule = ruleNameRepository.save(rule);
-		Assert.assertTrue(rule.getName().equals("Rule Name Update"));
+		assertEquals("RuleNameUpdate", rule.getName());
 
 		// Find
 		List<RuleName> listResult = ruleNameRepository.findAll();
-		Assert.assertTrue(listResult.size() > 0);
+		assertTrue(listResult.size() > 0);
 
 		// Delete
 		Integer id = rule.getId();
 		ruleNameRepository.delete(rule);
 		Optional<RuleName> ruleList = ruleNameRepository.findById(id);
-		Assert.assertFalse(ruleList.isPresent());
+		assertFalse(ruleList.isPresent());
+
+		RuleName rulee = new RuleName("RuleName", "Description", "Json", "Template", "SQL", "SQLPart");
+		rulee.setId(3);
+
 	}
 }
