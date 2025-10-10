@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,12 @@ public class User {
     @NotBlank(message = "FullName is mandatory")
     private String full_name;
 
+    @NotNull
+    private Boolean enabled = true;
+
     @NotBlank(message = "Role is mandatory")
     private String role = "USER";
+
+    public boolean isEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 }
