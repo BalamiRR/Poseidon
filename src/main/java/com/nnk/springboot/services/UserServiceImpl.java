@@ -62,9 +62,10 @@ public class UserServiceImpl implements UserService {
             newUser.setUsername(user.getUsername());
             newUser.setPassword(encoder.encode(user.getPassword()));
             newUser.setRole(user.getRole());
+            newUser.setEnabled(user.isEnabled());
             userRepository.save(newUser);
             updated = true;
-            logger.info("User with id " + id + " is updated as " + newUser);
+            logger.info("User with id " + id + " updated as " + newUser);
         } else {
             logger.error("Failed to update User with id " + id + " as " + user);
         }
@@ -77,7 +78,19 @@ public class UserServiceImpl implements UserService {
         newUser.setFull_name(user.getFull_name());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(encoder.encode(user.getPassword()));
-        newUser.setRole(user.getRole() == null ? "USER" : user.getRole());
+        if("ADMIN".equals(user.getRole())) {
+            newUser.setRole("ADMIN");
+            newUser.setEnabled(true);
+        } else {
+            newUser.setRole(user.getRole() == null ? "USER" : user.getRole());
+            newUser.setEnabled(user.isEnabled());
+        }
+
+        if(user.getRole().equals("ADMIN")) {
+            newUser.setEnabled(true);
+        } else {
+            newUser.setEnabled(user.isEnabled());
+        }
 
         userRepository.saveAndFlush(newUser);
     }

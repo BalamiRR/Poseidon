@@ -28,6 +28,7 @@ private final UserRepository userRepository;
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .roles(user.getRole())
+                .disabled(!user.isEnabled())
                 .build();
     }
 }
