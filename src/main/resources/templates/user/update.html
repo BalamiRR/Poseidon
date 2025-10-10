@@ -7,11 +7,9 @@
 	</head>
 	<body>
 		<div class="container">
-
 			<div class="row">
 				<h2>Update User</h2>
 			</div>
-
 			<div class="row">
 				<form action="#" th:action="@{/user/update/{id}(id=${user.id})}" th:object="${user}" method="post" class="form-horizontal" style="width: 100%">
 					<div class="form-group">
@@ -42,8 +40,13 @@
 							<label class="checkbox-inline"><input type="radio" th:field="*{role}" th:value="USER">User</label>
 						</div>
 					</div>
-
-
+					<div class="form-group mt-2" th:if="${user.role != 'ADMIN'}">
+						<label for="enabled" class="col-sm-2 control-label">Enabled</label>
+						<div class="col-sm-10">
+							<input type="checkbox" th:field="*{enabled}" id="enabled" class="form-check-input">
+							<small class="text-muted ms-2">Check to activate this user</small>
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="col-sm-12">
 							<input type="hidden" th:field="*{id}">
@@ -51,7 +54,6 @@
 							<input class="btn btn-primary btn-sm" type="submit" value="Update User">
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>
