@@ -17,25 +17,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/signup", "/css/**", "/js/**").permitAll()
-                    .anyRequest().authenticated()
-            )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/user/**").hasRole("ADMIN")
+                        .requestMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
+                        .hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll()
+                )
 
-            .formLogin(form -> form
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/home", true)
-                    .failureUrl("/login?error=true")
-                    .permitAll()
-            )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll())
 
-            .logout(logout -> logout
-                    .logoutSuccessUrl("/login?logout=true")
-                    .permitAll()
-            );
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
