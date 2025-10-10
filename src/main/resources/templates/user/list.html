@@ -1,46 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>User Management</title>
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Navbar</title>
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+	</head>
 	<body>
-	<nav class="navbar navbar-expand-lg navbar-light border-bottom mb-4" style="background-color:#f8f9fa;">
-		<div class="container">
-			<a class="navbar-brand fw-bold" href="/">POSEIDON</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarNav" aria-controls="navbarNav"
-					aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-				<ul class="navbar-nav d-flex align-items-center">
-					<li class="nav-item">
-						<a class="nav-link active fw-semibold" aria-current="page" href="/home">Home</a>
-					</li>
-					<li class="nav-item ms-2">
-						<form th:action="@{/logout}" method="post" class="d-inline">
-							<button type="submit" class="btn btn-outline-secondary btn-sm">Logout</button>
-						</form>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<div th:replace="~{navbar :: topbar}"></div>
 
 	<!-- Page Content -->
 	<div class="container">
-		<div class="row mb-3">
-			<div class="col">
-				<h2 class="fw-bold">User List</h2>
-			</div>
-			<div class="col text-end">
-				<a href="/user/add" class="btn btn-primary btn-sm">+ Add New</a>
-			</div>
-		</div>
+		<h2>User List</h2>
+		<a href="/user/add" class="btn btn-primary btn-sm">+ Add New</a>
 
 		<table class="table table-bordered align-middle">
 			<thead class="table-light">
@@ -49,6 +21,7 @@
 				<th>Full Name</th>
 				<th>User Name</th>
 				<th style="width: 25%">Role</th>
+				<th style="width: 10%">Enabled</th>
 				<th style="width: 15%" class="text-center">Action</th>
 			</tr>
 			</thead>
@@ -58,6 +31,7 @@
 				<td th:text="${user.full_name}"></td>
 				<td th:text="${user.username}"></td>
 				<td th:text="${user.role}"></td>
+				<td th:text="${user.enabled} ? 'Yes' : 'No'"></td>
 				<td class="text-center">
 					<a th:href="@{/user/update/{id}(id=${user.id})}" class="btn btn-sm btn-warning">Edit</a>
 					<a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-sm btn-danger ms-1">Delete</a>
