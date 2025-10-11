@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User newUser = optionalUser.get();
-            newUser.setFull_name(user.getFull_name());
+            newUser.setFullName(user.getFullName());
             newUser.setUsername(user.getUsername());
             newUser.setPassword(encoder.encode(user.getPassword()));
             newUser.setRole(user.getRole());
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         User newUser = new User();
-        newUser.setFull_name(user.getFull_name());
+        newUser.setFullName(user.getFullName());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(encoder.encode(user.getPassword()));
         if("ADMIN".equals(user.getRole())) {
