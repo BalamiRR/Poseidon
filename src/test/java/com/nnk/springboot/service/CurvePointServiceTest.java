@@ -53,6 +53,7 @@ public class CurvePointServiceTest {
         assertEquals(12.1, curvePoint.getValue(), 0.01);
     }
 
+
     @Test
     public void test_deleteCurvePointById() {
         Integer id = curvePoint.getId();
