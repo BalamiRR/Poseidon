@@ -34,7 +34,7 @@ public class RatingTests {
 		// Update
 		rating.setOrderNumber(20);
 		rating = ratingRepository.save(rating);
-		assertEquals(20, (int) rating.getOrderNumber());
+		assertTrue(rating.getOrderNumber() == 20);
 
 		// Find
 		List<Rating> listResult = ratingRepository.findAll();
