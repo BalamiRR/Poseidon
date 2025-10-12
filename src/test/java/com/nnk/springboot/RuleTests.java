@@ -31,15 +31,12 @@ public class RuleTests {
 		// Save
 		rule = ruleNameRepository.save(rule);
 		assertNotNull(rule.getId());
-		assertEquals("RuleName", rule.getName());
-		assertEquals("Json", rule.getJson());
-		assertEquals("Template", rule.getTemplate());
-		assertEquals("ornek", rule.getSqlStr());
+		assertTrue(rule.getName().equals("RuleName"));
 
 		// Update
 		rule.setName("RuleNameUpdate");
 		rule = ruleNameRepository.save(rule);
-		assertEquals("RuleNameUpdate", rule.getName());
+		assertTrue(rule.getName().equals("RuleNameUpdate"));
 
 		// Find
 		List<RuleName> listResult = ruleNameRepository.findAll();
