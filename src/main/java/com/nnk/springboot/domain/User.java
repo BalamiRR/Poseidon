@@ -29,8 +29,9 @@ public class User {
     private String password;
 
     @Pattern(regexp="^[A-Za-z]+$", message = "Input has to be text")
+    @Column(name = "full_name")
     @NotBlank(message = "FullName is mandatory")
-    private String full_name;
+    private String fullName;
 
     @NotNull
     private Boolean enabled = true;
