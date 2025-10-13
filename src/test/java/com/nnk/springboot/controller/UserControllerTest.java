@@ -57,14 +57,14 @@ public class UserControllerTest {
 
         User user1 = new User();
         user1.setId(1);
-        user1.setUsername("admin");
+        user1.setUsername("adminn");
         user1.setFullName("Administrator");
         user1.setRole("ADMIN");
         user1.setEnabled(true);
 
         User user2 = new User();
         user2.setId(2);
-        user2.setUsername("user");
+        user2.setUsername("userA");
         user2.setFullName("Normal User");
         user2.setRole("USER");
         user2.setEnabled(true);
@@ -96,13 +96,13 @@ public class UserControllerTest {
 
     @Test
     void home_ShouldReturnUserListView_AndAddAttributes() {
-        when(authentication.getName()).thenReturn("admin");
+        when(authentication.getName()).thenReturn("adminn");
         when(userService.findAll()).thenReturn(mockUsers);
 
         String viewName = userController.home(authentication, model);
 
         assertEquals("user/list", viewName);
-        verify(model).addAttribute("name", "Logged in as: admin");
+        verify(model).addAttribute("name", "Logged in as: adminn");
         verify(model).addAttribute("users", mockUsers);
         verify(userService, times(1)).findAll();
     }
