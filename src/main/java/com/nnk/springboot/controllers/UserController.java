@@ -36,13 +36,13 @@ public class UserController {
     public String validate(@Valid User user, BindingResult result, Model model) {
         String duplicateError = null;
         String patternError = null;
-        // Validate username
+
         User existsUser = userService.findByUsername(user.getUsername());
         if (existsUser != null) {
             duplicateError = "The username already exists";
             model.addAttribute("duplicateError", true);
         }
-        // Validate password
+
         String userPassword = user.getPassword();
         boolean valid = PasswordValidator.isValid(userPassword);
         if (!valid) {
@@ -70,7 +70,7 @@ public class UserController {
                              BindingResult result, Model model) {
         String duplicateError = null;
         String patternError = null;
-        // Username CAN be the same when update
+
         User userToUpdate = userService.findById(id);
         User existsUser = userService.findByUsername(user.getUsername());
         if (!userToUpdate.getUsername().equals(user.getUsername())) {
