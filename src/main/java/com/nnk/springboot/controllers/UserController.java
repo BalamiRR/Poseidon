@@ -41,6 +41,7 @@ public class UserController {
         if (existsUser != null) {
             duplicateError = "The username already exists";
             model.addAttribute("duplicateError", true);
+            result.rejectValue("username", "error.user", duplicateError);
         }
 
         String userPassword = user.getPassword();
