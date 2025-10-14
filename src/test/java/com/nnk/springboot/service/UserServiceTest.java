@@ -6,9 +6,13 @@ import com.nnk.springboot.services.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@ActiveProfiles("test")
+@Transactional
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserServiceTest {
@@ -20,7 +24,7 @@ public class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    @BeforeAll
+    @BeforeEach
     public void initsUser() {
         user.setUsername("Fuat");
         user.setPassword("Abc123@");
@@ -28,11 +32,6 @@ public class UserServiceTest {
         user.setRole("USER");
         userService.save(user);
         user = userRepository.findByUsername("Fuat");
-    }
-
-    @AfterAll
-    public void cleanUserServiceTest(){
-        userRepository.deleteAll();
     }
 
     @Test
