@@ -3,16 +3,16 @@ package com.nnk.springboot.service;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.services.RatingService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.List;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
+@Transactional
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RatingServiceTest {
@@ -25,7 +25,7 @@ public class RatingServiceTest {
     @Autowired
     private RatingRepository ratingRepository;
 
-    @BeforeAll
+    @BeforeEach
     public void initsRatingService(){
         rating.setMoodysRating("Moody");
         rating.setSandPRating("SandP");
@@ -33,12 +33,6 @@ public class RatingServiceTest {
         rating.setOrderNumber(12);
         ratingService.insertRatings(rating);
     }
-
-    @AfterAll
-    public void cleanRating(){
-        ratingRepository.deleteAll();
-    }
-
 
     @Test
     public void test_updateRating() {
@@ -59,4 +53,5 @@ public class RatingServiceTest {
         Rating foundId = ratingService.findById(id);
         assertNull(foundId);
     }
+
 }
