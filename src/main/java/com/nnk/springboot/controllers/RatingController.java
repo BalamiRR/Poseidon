@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Controller
 public class RatingController {
@@ -54,7 +52,7 @@ public class RatingController {
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Rating and return Rating list
         if(result.hasErrors()){
-            return "/rating/update";
+            return "rating/update";
         }
         Boolean updated = ratingService.updateRatingService(id,rating);
         if(updated){
