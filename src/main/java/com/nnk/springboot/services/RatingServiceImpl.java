@@ -17,16 +17,33 @@ import java.util.Optional;
 public class RatingServiceImpl implements RatingService {
     private final RatingRepository ratingRepository;
 
+    /**
+     * Retrieves all Rating entries from the database.
+     * @return a list of all rating lists
+     */
     @Override
     public List<Rating> findAll() {
         return ratingRepository.findAll();
     }
 
+    /**
+     * Inserts a new Rating into the database.
+     * @param rating the rating list object to be saved
+     */
     @Override
     public void insertRatings(Rating rating) {
         ratingRepository.save(rating);
     }
 
+    /**
+     * Updates an existing Rating identified by its ID.
+     * If the Rating exists, updates its fields (moodysRating, sandPRating, fitchRating, orderNumber)
+     * and saves the new values to the database.
+     *
+     * @param id ID of the rating list to update
+     * @param rating updated rating list data
+     * @return  if the update was successful, false otherwise
+     */
     @Override
     public Boolean updateRatingService(int id, Rating rating) {
         Optional<Rating> optionalRating = ratingRepository.findById(id);
@@ -47,6 +64,11 @@ public class RatingServiceImpl implements RatingService {
         }
     }
 
+    /**
+     * Retrieves a Rating by its unique ID.
+     * @param id ID of the rating list to retrieve
+     * @return the Rating object if found, otherwise null
+     */
     @Override
     public Rating findById(int id) {
         Optional<Rating> ratingList = ratingRepository.findById(id);
@@ -59,6 +81,11 @@ public class RatingServiceImpl implements RatingService {
         }
     }
 
+    /**
+     * Deletes a Rating by its unique ID.
+     * If the rating list is found, it will be deleted from the database.
+     * @param id ID of the rating list to delete
+     */
     @Override
     public void deleteById(int id) {
         Optional<Rating> rating = ratingRepository.findById(id);
