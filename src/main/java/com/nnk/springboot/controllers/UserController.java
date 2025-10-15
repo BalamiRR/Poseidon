@@ -19,6 +19,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Displays the list of all users.
+     * @param model model used to pass data to the view
+     * @return the name of the view "user/list"
+     */
     @RequestMapping("/user/list")
     public String home(Authentication authentication, Model model) {
         String name = authentication.getName();
@@ -27,11 +32,22 @@ public class UserController {
         return "user/list";
     }
 
+    /**
+     * Displays the form to create a new user.
+     * @param user empty user object for the form
+     * @return the view "user/add"
+     */
     @GetMapping("/user/add")
     public String addUser(User user) {
         return "user/add";
     }
 
+    /**
+     * @param user the user object populated from the form
+     * @param result holds validation errors
+     * @param model  model used to pass data to the view
+     * @return "redirect:/user/list" if successful, otherwise "user/add"
+     */
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
         String duplicateError = null;
@@ -50,6 +66,7 @@ public class UserController {
             patternError = "Password doesn't match the pattern";
             model.addAttribute("patternError", true);
         }
+
         if (duplicateError == null && patternError == null && (!result.hasErrors())) {
             userService.save(user);
             model.addAttribute("users", userService.findAll());
@@ -58,6 +75,11 @@ public class UserController {
         return "user/add";
     }
 
+    /**
+     * @param id    the ID of the user to update
+     * @param model model used to pass user data to the view
+     * @return the view name "user/update"
+     */
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id);
@@ -66,6 +88,13 @@ public class UserController {
         return "user/update";
     }
 
+    /**
+     * @param id ID of the user to update
+     * @param user updated user object
+     * @param result validation binding result
+     * @param model model used to pass feedback to the view
+     * @return redirect to "user/list" if success, otherwise stays on "user/update"
+     */
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
@@ -97,6 +126,13 @@ public class UserController {
         return "user/update";
     }
 
+    /**
+     * Deletes a user from the system.
+     *
+     * @param id    ID of the user to delete
+     * @param model model used to refresh the list after deletion
+     * @return redirect to "user/list" after successful deletion
+     */
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id);
