@@ -9,11 +9,22 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
+    /**
+     * Provides a bean for password hashing.
+     * @return a BCryptPasswordEncoder instance
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * This method defines:
+     * Role-based access rules for different URL patterns
+     * Form login page and default success URL
+     * Logout URL and behavior
+     * Access denied page for unauthorized access attempts
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -21,9 +32,10 @@ public class SecurityConfig {
                         .requestMatchers("/user/**").hasRole("ADMIN")
                         .requestMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
                         .hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/login", "/css/**", "/js/**", "/error/**").permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/home", true)
@@ -34,10 +46,11 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll())
 
-                .csrf(csrf -> csrf.disable());
+                .exceptionHandling(ex -> ex
+                        .accessDeniedPage("/error/403")
+                );
 
         return http.build();
     }
-
 
 }
