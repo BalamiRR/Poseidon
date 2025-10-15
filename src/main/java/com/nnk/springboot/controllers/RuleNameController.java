@@ -2,7 +2,6 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.services.RuleNameServiceImpl;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -57,7 +56,7 @@ public class RuleNameController {
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
         if(result.hasErrors()){
-            return "/ruleName/update";
+            return "ruleName/update";
         }
 
         Boolean updatedRuleName = ruleNameServiceImpl.updateRuleName(id, ruleName);
