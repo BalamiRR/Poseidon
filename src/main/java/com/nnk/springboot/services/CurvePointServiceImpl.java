@@ -16,16 +16,33 @@ import java.util.Optional;
 public class CurvePointServiceImpl implements CurvePointService {
     private final CurvePointRepository curvePointRepository;
 
+    /**
+     * Retrieves all CurvePoint entries from the database.
+     * @return a list of all CurvePoint lists
+     */
     @Override
     public List<CurvePoint> findAll() {
         return curvePointRepository.findAll();
     }
 
+    /**
+     * Inserts a new CurvePoint into the database.
+     * @param curvePoint the curvePoint list object to be saved
+     */
     @Override
     public void insertCurvePoint(CurvePoint curvePoint) {
         curvePointRepository.save(curvePoint);
     }
 
+    /**
+     * Updates an existing CurvePoint identified by its ID.
+     * If the CurvePoint exists, updates its fields (curveId, term, value )
+     * and saves the new values to the database.
+     *
+     * @param id ID of the curvePoint list to update
+     * @param curvePoint updated curvePoint list data
+     * @return  if the update was successful, false otherwise
+     */
     @Override
     public Boolean updateCurvePoint(int id, CurvePoint curvePoint) {
         Optional<CurvePoint> list = curvePointRepository.findById(id);
@@ -44,6 +61,11 @@ public class CurvePointServiceImpl implements CurvePointService {
         return updated;
     }
 
+    /**
+     * Retrieves a CurvePoint by its unique ID.
+     * @param id ID of the curvePoint list to retrieve
+     * @return the CurvePoint object if found, otherwise null
+     */
     @Override
     public CurvePoint findById(int id) {
         Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
@@ -56,6 +78,11 @@ public class CurvePointServiceImpl implements CurvePointService {
         }
     }
 
+    /**
+     * Deletes a CurvePoint by its unique ID.
+     * If the curvePoint list is found, it will be deleted from the database.
+     * @param id ID of the curvePoint list to delete
+     */
     @Override
     public void deleteById(int id) {
         Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
