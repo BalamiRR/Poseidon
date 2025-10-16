@@ -16,16 +16,33 @@ import lombok.extern.slf4j.Slf4j;
 public class BidListServiceImpl implements BidListService {
     private final BidListRepository bidListRepository;
 
+    /**
+     * Retrieves all BidList entries from the database.
+     * @return a list of all bid lists
+     */
     @Override
     public List<BidList> findAll() {
         return bidListRepository.findAll();
     }
 
+    /**
+     * Inserts a new BidList into the database.
+     * @param bidList the bid list object to be saved
+     */
     @Override
     public void insertBidList(BidList bidList) {
         bidListRepository.save(bidList);
     }
 
+    /**
+     * Updates an existing BidList identified by its ID.
+     * If the BidList exists, updates its fields (account, type, bid quantity)
+     * and saves the new values to the database.
+     *
+     * @param id ID of the bid list to update
+     * @param bidList updated bid list data
+     * @return  if the update was successful, false otherwise
+     */
     @Override
     public Boolean updateBidList(int id, BidList bidList) {
         Optional<BidList> list = bidListRepository.findById(id);
@@ -44,6 +61,11 @@ public class BidListServiceImpl implements BidListService {
         return updated;
     }
 
+    /**
+     * Retrieves a BidList by its unique ID.
+     * @param id ID of the bid list to retrieve
+     * @return the BidList object if found, otherwise null
+     */
     @Override
     public BidList findById(int id) {
         Optional<BidList> bidList = bidListRepository.findById(id);
@@ -56,6 +78,11 @@ public class BidListServiceImpl implements BidListService {
         }
     }
 
+    /**
+     * Deletes a BidList by its unique ID.
+     * If the bid list is found, it will be deleted from the database.
+     * @param id ID of the bid list to delete
+     */
     @Override
     public void deleteById(int id) {
         Optional<BidList> bidList = bidListRepository.findById(id);
@@ -65,7 +92,6 @@ public class BidListServiceImpl implements BidListService {
         } else {
             log.error("Failed to delete with id " + id);
         }
-
     }
 }
 
