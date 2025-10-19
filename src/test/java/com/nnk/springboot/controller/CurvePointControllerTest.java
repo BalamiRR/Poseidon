@@ -73,7 +73,7 @@ public class CurvePointControllerTest {
 
     @Test
     void testAddForm_ShouldShowAddForm() {
-        String viewName = curveController.addCurveForm();
+        String viewName = curveController.addCurveForm(model);
         assertEquals("curvePoint/add", viewName);
     }
 
