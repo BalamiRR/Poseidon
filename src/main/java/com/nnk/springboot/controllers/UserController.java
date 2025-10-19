@@ -128,7 +128,6 @@ public class UserController {
 
     /**
      * Deletes a user from the system.
-     *
      * @param id    ID of the user to delete
      * @param model model used to refresh the list after deletion
      * @return redirect to "user/list" after successful deletion
